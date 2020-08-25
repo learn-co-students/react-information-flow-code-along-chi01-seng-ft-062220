@@ -8,3 +8,38 @@ export function getRandomColor() {
   }
   return color
 }
+
+class Parent extends Component {
+  constructor() {
+    super()
+    this.state = {
+      color: getRandomColor()
+    }
+  }
+
+  changeColor = () => {
+    this.setState({
+      color: getRandomColor()
+    })
+  }
+
+  render() {
+    return (
+      <div className="parent" style={{backgroundColor: this.state.color}}>
+      <Child handleColorChange={this.changeColor}/>
+      <Child handleColorChange={this.changeColor}/>
+      </div>
+    )
+  }
+}
+
+class Child extends Component {
+  render() {
+    return (
+      <div onClick={this.props.handleColorChange}
+        className="child"
+        style={{backgroundColor: this.props.color}}
+      ></div>
+    )
+  }
+}
